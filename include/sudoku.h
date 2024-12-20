@@ -12,5 +12,6 @@ public:
     void setGrid(int arr[N][N]);
     bool isValid(int r, int c, int num);
     bool solve(int r, int c);
+    void readData();
 };
 #endif

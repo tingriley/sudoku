@@ -1,4 +1,6 @@
 #include <iostream>
+#include <fstream>
+#include <string>
 #include "sudoku.h"
 
 using namespace std;
@@ -14,12 +16,14 @@ Sudoku::Sudoku(){
 /* A utility function to print grid */
 void Sudoku::print()
 {
+    cout << "==================" <<endl;
     for (int i = 0; i < N; i++) 
     {
         for (int j = 0; j < N; j++)
             cout << grid[i][j] << " ";
         cout << endl;
     }
+    cout << "------------------" << endl << endl;
 }
 
 void Sudoku::setGrid(int arr[N][N]){
@@ -74,22 +78,26 @@ bool Sudoku::solve(int r, int c)
     
 }
 
+void Sudoku::readData(){
+    std::ifstream file; 
+    file.open("./data/grid.txt");
+    int x = 0;
+    if ( file.is_open() ) { 
+        for(int i = 0; i < N ; i++){
+            for (int j = 0; j < N; j++){
+                file >> x; 
+                grid[i][j] = x;
+            }
+        }
+        
+    }
+}
+
 int main()
 {
-    // 0 means unassigned cells
-    int grid[N][N] = { { 3, 0, 6, 5, 0, 8, 4, 0, 0 },
-                       { 5, 2, 0, 0, 0, 0, 0, 0, 0 },
-                       { 0, 8, 7, 0, 0, 0, 0, 3, 1 },
-                       { 0, 0, 3, 0, 1, 0, 0, 8, 0 },
-                       { 9, 0, 0, 8, 6, 3, 0, 0, 5 },
-                       { 0, 5, 0, 0, 9, 0, 6, 0, 0 },
-                       { 1, 3, 0, 0, 0, 0, 2, 5, 0 },
-                       { 0, 0, 0, 0, 0, 0, 0, 7, 4 },
-                       { 0, 0, 5, 2, 0, 6, 3, 0, 0 } };
-
-    
     Sudoku sudoku;
-    sudoku.setGrid(grid);
+    sudoku.readData();
+    sudoku.print();
     if(sudoku.solve(0, 0)){
         sudoku.print();
     }

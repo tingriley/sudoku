@@ -1,6 +1,6 @@
 CXXFLAGS = -Wall -O3
 OBJ_DIR  := obj
-BIN_DIR  := bin
+BIN_DIR  := .
 TARGET = sudoku
 INCLUDE = -Iinclude
 LDFLAGS = -lm -L/usr/local/lib -lboost_regex
@@ -24,4 +24,4 @@ $(BIN_DIR)/$(TARGET): $(OBJECTS)
 
 clean:
 	-@rm -rvf $(OBJ_DIR)
-	-@rm -rvf $(BIN_DIR)
+	-@rm -rvf $(BIN_DIR)/$(TARGET)
